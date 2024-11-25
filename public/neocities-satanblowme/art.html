@@ -1,0 +1,76 @@
+
+
+<html>
+  <head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>evernight</title>
+    <!-- The style.css file allows you to change the look of your web pages.
+         If you include the next line in all your web pages, they will all share the same look.
+         This makes it easier to make new pages for your site. -->
+    
+ 
+
+  <style>
+
+ html {  
+  background-image: none;
+  background-repeat: repeat;
+  background-color: #000000;
+  background-size: 100px 100px;
+  
+}
+
+ body { 
+  background: transparent;
+  
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+}
+</style>
+
+   <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+ 
+ 
+ 
+  </head>
+<body>  
+
+
+
+
+  <div class="message">
+
+  <button onclick="reflection()">reflection?</button>
+  <button onclick="off()">What if the lights are off?</button>
+
+  <br>
+  <br>
+
+  <a href="/not_found.html"><img src="i-98.gif" position="absolute"></a>
+  </div>
+
+
+<script type="text/javascript">
+
+
+button.addEventListener('click', reflection); 
+
+function reflection() {  
+  document.documentElement.style.backgroundColor = "red"; }
+       // document.html.style.cssText = `background-image: url('i-98.gif');background-repeat: repeat`;
+function off() {  
+  document.documentElement.style.backgroundColor = "blue"; }
+
+//const html = document.querySelector('.html');
+//const button = document.querySelector('button');
+
+
+        
+
+</script>
+</body>
+</html>

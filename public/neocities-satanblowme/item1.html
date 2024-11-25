@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+html { 
+  background: url(img/291.GIF) repeat; }
+  
+  div.blog {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  text-align: center;
+}
+
+  @import url(https://fonts.googleapis.com/css?family=Slabo+27px&display=swap);
+
+  body {
+    font-family: 'Slabo 27px', serif;
+    background-image: url("../img/background-t-shirt.png");
+    background-repeat: repeat;
+    color: #fff;
+    margin: 0;
+    padding: 9px 9px;}
+
+  .page {
+    max-width: 600px;
+    margin: 0 auto 6px auto;}
+
+  .panel {
+    background-color: #fff;
+    color: #666;
+    box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+    overflow: auto;
+    border-radius: 1em;
+    border: 1px solid #ccc;}
+
+  p {
+    font-family: 'courier new', serif;
+    font-size: 14px;
+    line-height: 1.2em;}
+    
+
+  a {
+      text-decoration: none;}
+
+  .choice {
+    width: 80px;}
+
+  /********** MAIN PICTURE **********/
+  #photo-viewer {
+    position: relative;
+    height: 400px;
+    overflow: hidden;}
+
+  #photo-viewer.is-loading:after {
+    content: url('../img/load.gif');
+    position: absolute;
+    top: 0;
+    left: 0;}
+
+  #photo-viewer img {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;}
+
+  /********** THUMBNAILS **********/
+  #thumbnails {
+    margin: 10px 5px 0 0;
+    height: 60px;}
+
+  a.active {
+    opacity: 0.3;}
+
+  /********** PARTS OF PAGES **********/
+  .gallery{
+    width:370px;
+    padding: 10px 5px;
+    float: left;}
+
+  .description {
+    width: 200px;
+    float: right;
+    padding: 20px 10px 0 0;
+    font-size: 85%;
+    line-height: 3em;}
+
+  .standfirst {
+    margin: 0;}
+
+  /********** BUY BUTTON **********/
+  a#buy {
+    background-color: #cc3333;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 10px 9px 10px;
+    margin: 5px 0 20px 0;
+    float: left;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;}
+
+  a#buy:hover {background-color: #333;}
+  
+
+
+</style>
+  <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+</head>
+<body>
+<div class="satanblowme"><a href="index.html"><img src="img/satanblowme.gif"></a></div><br><br>
+ <div class="header"> <a href="scroll.html"><img src="img/i-20127.gif" height="70px" width="70px"></a><a href="/cursed_imgs.html"><img src="artnartist.gif" height="70px" width="70px"></a></div>
+ 
+    <section class="page panel">
+      <div class="gallery">
+        <div id="photo-viewer"></div>
+        <div id="thumbnails">
+          <a href="fits/berrycute.jpg" class="thumb active" title=""><img src="fits/berrycute.jpg" alt="" width="30px" height="30px"/></a>
+          <a href="fits/berrycuteclose.jpg" class="thumb" title=""><img src="fits/berrycuteclose.jpg" alt="" width="30px" height="30px"/></a>
+         </div>
+      </div>
+      <div class="description">
+        <p class="standfirst">
+          <strong>berry cute tank top</strong>
+        </p>
+        <p>
+         2 color screen print of berry cute fairy on a cotton tank. felt applique pink strawberry with hand sewn embroidered seeds.
+        </p>
+        <p><strong>$30</strong></p>
+      
+          
+        
+      
+      
+      
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=azimitravich@gmail.com&su=i want to buy this!&body=Please tell me which item you would like to buy and how you would like to pay! I accept venmo, cash app, or paypal. If you need it shipped, plz also send me your mailing address so I can calculate shipping, this will be added to the total. Local pickup is free! <3&bcc=anazim@tutanota.de" id="buy">Buy now</a>
+      </div>
+    </section>
+    
+    
+    
+    
+
+
+   <div class="footer"><a href="index.html"><img src="i-98.gif"></a>!</div>
+   
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+var request;
+var $current;
+var cache = {};
+var $frame = $('#photo-viewer');
+var $thumbs = $('.thumb');
+
+function crossfade($img) {
+  if ($current) {
+    $current.stop().fadeOut('slow');
+  }
+
+  $img.css({
+    marginLeft: -$img.width() / 2,
+    marginTop: -$img.height() / 2
+  });
+
+  $img.stop().fadeTo('slow', 1);
+  $current = $img;
+
+}
+
+$(document).on('click', '.thumb', function(e){
+  var $img,
+      src = this.href;
+      request = src;
+
+  e.preventDefault();
+  $thumbs.removeClass('active');
+  $(this).addClass('active');
+
+  if (cache.hasOwnProperty(src)) {
+    if (cache[src].isLoading === false) {
+      crossfade(cache[src].$img);
+    }
+  } else {
+    $img = $('<img/>');
+    cache[src] = {
+      $img: $img,
+      isLoading: true
+    };
+
+    $img.on('load', function(){
+      $img.hide();
+      $frame.removeClass('is-loading').append($img);
+      cache[src].isLoading = false;
+      if (request === src) {
+        crossfade($img);
+      }
+    });
+
+    $frame.addClass('is-loading');
+    $img.attr({
+      'src': src,
+      'alt': this.title || ''
+    });
+
+  }
+
+});
+
+$('.thumb').eq(0).click();
+</script>
+
+
+</body>
+</html>
