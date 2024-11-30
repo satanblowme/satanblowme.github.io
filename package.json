@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/satanblowme/satanblowme.github.io/issues"
   },
-  "homepage": "https://github.com/satanblowme/satanblowme.github.io#readme"
+  "homepage": "https://github.com/satanblowme/satanblowme.github.io#readme",
+  "devDependencies": {
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
+  }
 }
