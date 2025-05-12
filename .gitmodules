@@ -4,3 +4,6 @@
 [submodule "satanblowme/themes/hugo-theme-console"]
 	path = satanblowme/themes/hugo-theme-console
 	url = https://github.com/mrmierzejewski/hugo-theme-console.git
+[submodule "satanblowme/hugo-theme-console"]
+	path = satanblowme/hugo-theme-console
+	url = https://github.com/mrmierzejewski/hugo-theme-console.git
