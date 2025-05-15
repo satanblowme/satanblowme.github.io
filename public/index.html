@@ -24,46 +24,92 @@ text-align: center;
 
 } 
     
-    }
- /*.collections {
-        position: relative;
-         z-index: 20px;
-    }
-    .collections img {
-        position: absolute;
-         clip: rect(100px,300px,200px,0px);
-        top: -40px;
-        left: 400px;
-        z-index: 20px;
-       
-       
-    }
-    
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-   */
-    
-/* Contains the columns of posts.
-.grid-container {
-  display: grid ;
-  grid-auto-columns: 300px ;
-  grid-gap: 10px;
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
   
+  background-color: transparent;
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
 
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
 
- .ff7 {
-  display: inline-block;
-  width: 100%;
-  margin: 10px;
-  
- } 
- .ff7 img {
-  max-width: 100% ;
-  height: auto;
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
   }
-  
-
-
- 
+}
 
 
 
@@ -72,10 +118,7 @@ text-align: center;
 
   <link href="/style.css" rel="stylesheet" type="text/css" media="all">
 </head><body>
- <marquee behavior=scroll direction=down scrollamount=5 scrolldelay=32 height=630 style='position:absolute; left:51%; top:72px; width:15; height:630px;'><img class="lazy" data-src="onewingedangel.gif" border=0></marquee>
-<marquee behavior=scroll direction=down scrollamount=6 scrolldelay=13 height=658 style='position:absolute; left:58%; top:181px; width:15; height:658px;'><img class="lazy" data-src="startwnkleclr.gif" border=0></marquee>
-<marquee behavior=scroll direction=down scrollamount=4 scrolldelay=28 height=599 style='position:absolute; left:68%; top:138px; width:15; height:599px;'><img sclass="lazy" data-src="onewingedangel.gif" border=0></marquee>
-<marquee behavior=scroll direction=down scrollamount=3 scrolldelay=24 height=691 style='position:absolute; left:64%; top:160px; width:15; height:691px;'><img src="startwnkleclr.gif" border=0></marquee>
+ <marquee behavior=scroll direction=down scrollamount=5 scrolldelay=32 height=630 style='position:absolute; left:51%; top:72px; width:15; height:630px;'><img class="lazy" data-src="onewingedangel.gif" border=0></marquee></marquee>
 
  
   
@@ -86,74 +129,69 @@ text-align: center;
 
   <br>
   <div class="header">
-  <a href="https://lordeachildress.com/" target="_blank" rel="noopener noreferrer"><img src="img/lordea.gif"></a>
+
     <a href="home.html"><img src="img/about_us.gif" style="width:auto; max-height:30px;"></a>
-     <a href="links.html"><img src="img/linkcloud.gif" style="width:auto; height:40px;"></a>
     <a href="/cursed_imgs.html"><img src="img/art.gif" style="width:auto; max-height:70px;"></a>
        <a href="collections.html"><img src="img/collections.gif" width="280px" height="40px" style="object-fit:cover;"></a>
-       <a href="https://mail.google.com/mail/?view=cm&fs=1&to=azimitravich@gmail.com&su=i want to buy this!&body=Please tell me which item you would like to buy and how you would like to pay! I accept venmo, cash app, or paypal. If you need it shipped, plz also send me your mailing address so I can calculate shipping, this will be added to the total. Local pickup at a market is free! <3&bcc=anazim@tutanota.de" target="_blank" rel="noopener noreferrer"><img src="img/3demail.gif" height="50px" width="50px"></a></div>
+       <a href="https://mail.google.com/mail/?view=cm&fs=1&to=azimitravich@gmail.com &bcc=anazim@tutanota.de" target="_blank" rel="noopener noreferrer"><img src="img/3demail.gif" height="50px" width="50px"></a></div>
  <br>
 
-<div class="row">
-  <div class="column">
-         <div class="ff7"> 
-  <img src="img/new_heart.gif" style="width:auto; max-height:15px;"> <br>
-           if you can read this, that means the mirror is working.<br>
-  <img src="fits/plus1.jpg" style="width:100%"><BR>
-  SOLD</div><br><br><br>
-    
-        <div class="ff7">
-  <img src="img/new_heart.gif" style="width:auto; max-height:15px;"> <br>
-  <a href="/item2.html"><img src="fits/babydoll2.jpg" style="width:100%"></A>
-     </div><br><br><br>
-     
-      <div class="ff7">
-  <img src="img/new_heart.gif" style="width:auto; max-height:15px;"> <br>
-  <img class="lazy" data-src="fits/babydoll1.jpg" style="width:100%">
-    </div><br><br><br>
-    
-    
-    <div class="ff7">
-   <img class="lazy" data-src="fits/halter1.jpg" style="width:100%">
-    </div><br><br><br>
-    
-    <div class="ff7">
-    <img src="img/new_heart.gif" style="width:auto; max-height:15px;">
-    <a href="item3.html"><img class="lazy" data-src="fits/rugrats1.jpg" style="width:100%"></a>
-       </div></div>
-    
-    
-  <div class="column">  
-      <div class="ff7">
-   <img src="img/new_heart.gif" style="width:auto; max-height:15px;"> <br>
-   <img class="lazy" data-src="fits/sold/2024/plus3.jpg" style="width:100%"><br>
-   <img class="lazy" data-src="fits/plusback3.jpg" style="width:100%"><br>
-   SOLD
-    </div><br><br><br> 
-    
-      <div class="ff7">
-   <img src="img/new_heart.gif" style="width:auto; max-height:15px;"> <br>
-    <img class="lazy" data-src="fits/plus2.jpg" style="width:100%"><br>
-    <img class="lazy" data-src="fits/plus2back.jpg" style="width:100%">
-    </div><br><br><br>
-    
-      <div class="ff7">
-   <img src="img/new_heart.gif" style="width:auto; max-height:15px;"> <br>
-   <img class="lazy" data-src="fits/20240810_160612.jpg" style="width:100%"></div><br><br><br>   
-    
-    <div class="ff7">
-   <img src="img/new_heart.gif" style="width:auto; max-height:15px;"> <br>
-   <img class="lazy" data-src="fits/jester1.jpg" style="width:100%"></div><br><br><br>
-     
-     <div class="ff7">
-   <img src="img/new_heart.gif" style="width:auto; max-height:15px;">
-   <img class="lazy" data-src="fits/20240810_155929.jpg" style="width:100%"> </div><br><br><br>
 
-    </div></div><br><br><br><br><br>
+<img class ="myImages" id="myImg" src="fits/hat1.jpg"  style="width:100%;max-width:300px" alt="">
+<img class ="myImages" id="myImg" src="fits/hat2.jpg"  style="width:100%;max-width:300px" alt="">
+<img class ="myImages" id="myImg" src="fits/hat3.jpg"   style="width:100%;max-width:300px" alt="">
+<img class ="myImages" id="myImg" src="fits/hat4.jpg"  style="width:100%;max-width:300px" alt=""/>
 
- <div class="footer"><br><br><a href="https://lordeachildress.com/" target="_blank" rel="noopener noreferrer"><img src="img/evanescencebanner.gif"></a>
- </div>
- 
+
+
+<br><br>
+
+   <div class="footer"><a href="https://depop.com/satanblowme"><img src="i-98.gif"></a>!</div>
+   
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var images = document.getElementsByClassName('myImages');
+// the image
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Go through all of the images with our custom class
+for (var i = 0; i < images.length; i++) {
+  var img = images[i];
+  // and attach our click listener for this image.
+  img.onclick = function(evt) {
+    console.log(evt);
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+  }
+}
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+</script>
 <script>
 
 document.addEventListener("DOMContentLoaded", function() {
