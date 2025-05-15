@@ -1,0 +1,228 @@
+/* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
+   HTML content. To learn how to do something, just try searching Google for questions like
+   "how to change link color." */
+
+
+ a {
+  color: #8bc466;
+  cursor: help;
+} 
+
+ body {
+  background-color: transparent;
+  background-image: [url(416.gif)]; 
+  background-repeat: repeat;
+  color: white;
+  font-family: Verdana;
+  font-size: 12px;
+  padding-bottom: 60px;
+
+}
+
+ button {
+   padding: 10px 20px;
+   font-size: 1.2em;
+ }
+
+
+
+ .blog {
+  background-color: transparent;
+  background-image: none;
+  width: 50%;
+  left: auto;
+  color: white;
+  border: none;
+  margin: 20px;
+  padding: 20px;
+  position: sticky;
+  z-index: 10;
+ 
+
+} 
+
+ /* .column {
+  column-width: auto;
+  column-count: 3;
+  column-gap: 10px; 
+  column-fill: balance;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+
+} 
+*/
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+
+}
+
+
+.column  {
+ flex: 100%;
+  max-width: 35%;
+  padding: 0 4px;
+ 
+
+}
+
+.row img {
+   margin-top: 8px;
+  vertical-align: middle;
+    z-index: 10;
+}
+
+
+ 
+
+  
+.ff7{
+  border: solid 1px #424542;
+  box-shadow: 1px 1px #e7dfe7,
+              -1px -1px #e7dfe7,
+              1px -1px #e7dfe7,
+              -1px 1px #e7dfe7,
+              0 -2px #9c9a9c,
+              -2px 0 #7b757b,
+              0 2px #424542;
+              
+              
+
+  z-index: 10;
+  overflow:inherit;
+  max-width:inherit;
+  margin: inherit;
+  position: relative;
+  padding: 10px 20px;
+  
+
+  
+  background: #04009d;
+  background: -moz-linear-gradient(top,  #04009d 0%, #06004d 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#04009d), color-stop(100%,#06004d));
+  background: -webkit-linear-gradient(top,  #04009d 0%,#06004d 100%);
+  background: -o-linear-gradient(top,  #04009d 0%,#06004d 100%);
+  background: -ms-linear-gradient(top,  #04009d 0%,#06004d 100%);
+  background: linear-gradient(to bottom,  #04009d 0%,#06004d 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#04009d', endColorstr='#06004d',GradientType=0 );
+
+
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+}
+ .ff7 > div {
+  color: #eff1ff;
+  text-shadow: 2px 2px #212421,
+               1px 1px #212021;
+  font-family: Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+   z-index: 10;
+   position: inherit;
+  
+  
+  /* p
+ 
+  padding: 10px 20px; */
+  
+ }
+  
+  /*max-width: 100%;
+  margin: auto;
+  float:left;
+} */
+
+ /* .fits {
+  max-width:100px;
+  height: 100px;
+ 
+  }
+
+ .row after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+*/
+
+ .message {
+    background-color: transparent;
+  background-image: none;
+  width: 50%;
+  margin: auto;
+  color: white;
+  border: 0px solid white;
+  text-align: center;
+  padding: 20px;
+  z-index: 10;
+  margin-top: 300px;
+  
+ }
+
+ .satanblowme {
+        position: relative;
+        z-index: 30;
+        padding-bottom: 70px;
+    }
+    .satanblowme img {
+        position: absolute;
+        margin-top: -80px;
+        margin-left: -40px;
+        height: inherit;
+        width: auto;
+       
+        
+       
+    }
+
+.header {
+  background-color: transparent;
+  text-align: left;
+  /*max-width: 40%;*/
+   margin-top: 60px;
+  padding-right: 80px;
+  position: relative;
+  z-index: 40;
+  overflow: hidden;
+}
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+  .header {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media (max-width: 800px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+  
+
+.footer {
+  background-color: transparent;
+  position:absolute;
+  margin-bottom: auto;
+   width:100%;
+   height:60px;
+flex-shrink: 0;
+  z-index: 10;
+}
+}
