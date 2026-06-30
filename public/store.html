@@ -1,27 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-const ejs = require('ejs');
 
-async function generateSite() {
-  try {
-    console.log('Generating static site...');
-
-    const dataPath = path.join(__dirname, '../data/products.json');
-    let products = [];
-    
-    if (fs.existsSync(dataPath)) {
-      const raw = fs.readFileSync(dataPath, 'utf-8');
-      const parsed = JSON.parse(raw);
-      // v3 API response: { data: [...], meta: {...} }
-      products = parsed.data || parsed;
-    }
-
-    const outputDir = path.join(__dirname, '../public');
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
-    }
-
-    const template = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,40 +96,24 @@ async function generateSite() {
 
   <p class="shop-heading">shop</p>
 
-  <% if (products.length === 0) { %>
-    <p class="empty-msg">no products yet!</p>
-  <% } else { %>
+  
     <div class="products-grid">
-      <% products.forEach(function(product) { %>
+      
         <div class="product-card">
-          <% if (product.thumbnail_url && !product.thumbnail_url.includes('localhost')) { %>
-            <img src="<%= product.thumbnail_url %>" alt="<%= product.name %>">
-          <% } else { %>
+          
             <div class="no-img">no image</div>
-          <% } %>
+          
           <div class="product-info">
-            <p class="product-name"><%= product.name || 'item' %></p>
-            <% if (product.price) { %><p class="product-price"><%= product.price.display_amount %></p><% } %>
-            <% if (product.description) { %><p class="product-desc"><%= product.description.length > 80 ? product.description.substring(0, 80) + '...' : product.description %></p><% } %>
+            <p class="product-name">yes</p>
+            <p class="product-price">$10.00</p>
+            <p class="product-desc">good</p>
           </div>
         </div>
-      <% }); %>
+      
     </div>
-  <% } %>
+  
 
   <div class="footer"><a href="https://depop.com/satanblowme"><img src="i-98.gif"></a></div>
 </body>
 </html>
-    `;
-
-    const html = ejs.render(template, { products });
-    fs.writeFileSync(path.join(outputDir, 'store.html'), html);
-
-    console.log(`✅ Generated store.html with ${products.length} products`);
-  } catch (error) {
-    console.error('❌ Error generating site:', error.message);
-    process.exit(1);
-  }
-}
-
-generateSite();
+    
