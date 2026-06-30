@@ -1,0 +1,42 @@
+name: Sync Products & Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Fetch products from Spree
+        run: |
+          curl -s \
+            -H "Authorization: ${{ secrets.SPREE_API_KEY }}" \
+            "${{ secrets.SPREE_API_URL }}/api/v2/storefront/products?per_page=500&include=images,variants" \
+            -o products.json
+
+      - name: Commit & push products.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add products.json
+          git diff --cached --quiet || git commit -m "chore: update products.json [skip ci]"
+          git push
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate static site
+        run: npm run generate-site
+
+      - name: Deploy to Neocities
+        run: node scripts/deployNeocities.js
+        env:
+          NEOCITIES_API_TOKEN: ${{ secrets.NEOCITIES_API_TOKEN }}
