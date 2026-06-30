@@ -2,36 +2,37 @@ name: Deploy to Neocities
 
 on:
   push:
-    branches: [ main ]
-  schedule:
-    - cron: '0 2 * * *'
+    branches:
+      - main
   workflow_dispatch:
+  repository_dispatch:
+    types: [spree-update]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Setup Node.js
+
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm install
-      
-      - name: Fetch Spree data
+
+      - name: Fetch data from Spree
+        run: npm run fetch-data
         env:
           SPREE_API_URL: ${{ secrets.SPREE_API_URL }}
           SPREE_API_KEY: ${{ secrets.SPREE_API_KEY }}
-        run: npm run fetch-data
-      
+
       - name: Generate static site
         run: npm run generate-site
-      
+
       - name: Deploy to Neocities
+        run: node scripts/deployNeocities.js
         env:
           NEOCITIES_API_TOKEN: ${{ secrets.NEOCITIES_API_TOKEN }}
-        run: npm run deploy
