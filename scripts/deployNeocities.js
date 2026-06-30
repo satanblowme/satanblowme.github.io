@@ -21,12 +21,6 @@ function walk(dir) {
   });
 }
 
-function promptYesNo(question) {
-  process.stdout.write(question);
-  const buf = fs.readFileSync(0, 'utf8').trim().toLowerCase();
-  return buf === 'y' || buf === 'yes';
-}
-
 const files = walk(publicDir).filter((abs) => {
   const rel = path.relative(publicDir, abs).replace(/\\/g, '/');
   if (rel.endsWith('.DS_Store')) return false;
@@ -39,14 +33,9 @@ if (!files.length) {
 }
 
 const rels = files.map((abs) => path.relative(publicDir, abs).replace(/\\/g, '/'));
-console.log(`\nAbout to upload ${rels.length} files from public/:`);
+console.log(`\nUploading ${rels.length} files from public/:`);
 rels.slice(0, 40).forEach((r) => console.log(`  - ${r}`));
 if (rels.length > 40) console.log(`  ...and ${rels.length - 40} more`);
-
-if (!promptYesNo('\nProceed with full public/ sync to Neocities? (y/N): ')) {
-  console.log('Cancelled.');
-  process.exit(0);
-}
 
 for (let i = 0; i < files.length; i++) {
   const abs = files[i];
