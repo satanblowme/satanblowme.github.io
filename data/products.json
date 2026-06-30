@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "id": "prod_UkLWZg9DAJ",
+      "name": "yes",
+      "slug": "yes",
+      "meta_title": null,
+      "meta_description": null,
+      "meta_keywords": null,
+      "variant_count": 0,
+      "available_on": null,
+      "purchasable": true,
+      "in_stock": true,
+      "backorderable": false,
+      "available": true,
+      "description": "good",
+      "description_html": "<p>good</p>",
+      "default_variant_id": "variant_UkLWZg9DAJ",
+      "thumbnail_url": "http://localhost:3000/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--f12a8f7e59cc21f80a486e2b6884938e7f914951/tama_bags.jpg",
+      "tags": [],
+      "price": {
+        "id": "price_UkLWZg9DAJ",
+        "amount": "10.0",
+        "amount_in_cents": 1000,
+        "compare_at_amount": null,
+        "compare_at_amount_in_cents": null,
+        "currency": "USD",
+        "display_amount": "$10.00",
+        "display_compare_at_amount": null,
+        "price_list_id": null
+      },
+      "original_price": null
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "limit": 100,
+    "count": 36,
+    "pages": 1,
+    "from": 1,
+    "to": 36,
+    "in": 36,
+    "previous": null,
+    "next": null
+  }
+}
