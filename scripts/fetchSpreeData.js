@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 
-const SPREE_BASE_URL = process.env.SPREE_API_URL || 'http://localhost:3000';
+const SPREE_BASE_URL = (process.env.SPREE_API_URL || 'http://localhost:3000')
+  .replace(/\/api\/v3\/store\/products\/?$/, '')
+  .replace(/\/$/, '');
 
 function ensureDir(dir) { if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true }); }
 function slug(s) { return String(s || 'item').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); }
