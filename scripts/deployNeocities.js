@@ -11,10 +11,10 @@ if (!apiToken) {
 
 const nc = new Neocities(apiToken);
 
-const filePath = path.join(__dirname, '../store.html');
+const filePath = path.join(__dirname, '../public/store.html');
 
 if (!fs.existsSync(filePath)) {
-  console.error('❌ store.html not found');
+  console.error('❌ store.html not found at', filePath);
   process.exit(1);
 }
 
