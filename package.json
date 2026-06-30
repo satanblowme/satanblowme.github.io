@@ -6,11 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "fetch-data": "node scripts/fetchSpreeData.js",
-    "generate-site": "node scripts/generateSite.js",
-    "sync": "node scripts/syncProducts.js",
-    "deploy": "npm run fetch-data && npm run generate-site && node scripts/deployNeocities.js",
-    "dev": "npm run fetch-data && npm run generate-site"
+    "fetch-data": "dotenv -e .env -- node scripts/fetchSpreeData.js",
+    "generate-site": "dotenv -e .env -- node scripts/generateSite.js",
+    "sync": "dotenv -e .env -- node scripts/syncProducts.js",
+    "deploy": "dotenv -e .env -- npm run fetch-data && dotenv -e .env -- npm run generate-site && dotenv -e .env -- node scripts/deployNeocities.js",
+    "dev": "dotenv -e .env -- npm run fetch-data && dotenv -e .env -- npm run generate-site"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "neocities": "^0.0.3"
   },
   "devDependencies": {
+    "dotenv-cli": "^11.0.0",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
   }
