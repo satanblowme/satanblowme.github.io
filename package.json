@@ -8,6 +8,7 @@
     "build": "webpack",
     "fetch-data": "node scripts/fetchSpreeData.js",
     "generate-site": "node scripts/generateSite.js",
+    "sync": "node scripts/syncProducts.js",
     "deploy": "npm run fetch-data && npm run generate-site && node scripts/deployNeocities.js",
     "dev": "npm run fetch-data && npm run generate-site"
   },
