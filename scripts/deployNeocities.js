@@ -60,6 +60,12 @@ for (let i = 0; i < files.length; i++) {
       ],
       { encoding: 'utf8' }
     );
+    let parsed;
+    try { parsed = JSON.parse(out); } catch (_) { parsed = null; }
+    if (parsed && parsed.result === 'error') {
+      console.error(`❌ Neocities rejected: ${rel} — ${parsed.message || JSON.stringify(parsed)}`);
+      process.exit(1);
+    }
     if (out && out.trim()) console.log(`   ${out.trim()}`);
   } catch (e) {
     console.error(`❌ Failed: ${rel}`);

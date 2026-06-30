@@ -11,16 +11,17 @@ try {
   // 1. Fetch fresh product data from local Spree
   run('node scripts/fetchSpreeData.js');
 
-  // 2. Commit and push data/products.json
+  // 2. Commit data/products.json and mirrored product images together
   run('git add data/products.json');
+  run('git add public/img/products');
   // Only commit if there are actual changes
   try {
     run('git diff --cached --quiet');
     console.log('No product changes to commit.');
   } catch (_) {
-    run('git commit -m "chore: update products.json"');
+    run('git commit -m "chore: update products and mirrored images"');
     run('git push');
-    console.log('\u2705 Products synced and pushed to GitHub');
+    console.log('\u2705 Products and images synced and pushed to GitHub');
     console.log('\ud83d\ude80 GitHub Actions will regenerate the site and deploy to Neocities');
   }
 } catch (err) {
