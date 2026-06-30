@@ -23,12 +23,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Fetch data from Spree
-        run: npm run fetch-data
-        env:
-          SPREE_API_URL: ${{ secrets.SPREE_API_URL }}
-          SPREE_API_KEY: ${{ secrets.SPREE_API_KEY }}
-
       - name: Generate static site
         run: npm run generate-site
 
