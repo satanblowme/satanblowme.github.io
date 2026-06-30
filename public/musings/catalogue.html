@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    <link href="satanblowme.org/style.css" rel="stylesheet" type="text/css" media="all">
+    
+
+  </head>
+  <body>
+      
+<div id="result"></div>
+  <ul>
+    <li><input type="checkbox" value="product_category_1" data-id="1" />Tractors</li>
+    <li><input type="checkbox" value="product_category_2" data-id="2" />Ride Ons</li>
+    <li><input type="checkbox" value="product_category_3" data-id="3" />Machinery</li>
+    <li><input type="checkbox" value="product_category_4" data-id="4" />Outdoor equipment</li>
+</ul>
+
+<input type="button" id="btn" value="Grab data" />
+
+<script>
+Copy
+window.onload = function(){
+    document.getElementById('btn').addEventListener('click', function(){
+        console.log(grabData(true));
+        document.getElementById('result').innerText = JSON.stringify(grabData(true));
+    });
+}
+
+function grabData(checked){
+    checked = typeof(checked) == 'undefined' ? false : checked
+    var items = document.getElementsByTagName('input');
+    var data  = [];
+
+    for(var i = 0; i < items.length; i++){
+        if(items[i].type != 'checkbox' || items[i].checked != checked){
+             continue;
+        }
+
+        data.push(items[i].getAttribute('data-id'));
+    }
+
+    var item = {
+        id: 2,
+        cat_id: data,
+        state: checked + 0
+    };
+
+    return item;
+}</script>
+  </body>
+  
+</html>

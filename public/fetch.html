@@ -1,0 +1,25 @@
+
+<html>
+<body>
+
+  
+
+
+<div id="products"></div>
+
+<script>
+  fetch('https://spree-hi7c.onrender.com/') {
+    headers: {
+      'x-spree-api-key': 'pk_UmiSwMxgbBoKMy8k9gEquYEW'
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('products');
+    data.data.forEach(product => {
+      container.innerHTML += `<p>${product.name} - ${product.price.display_amount}</p>`;
+    });
+  });
+</script>
+</body>
+</html>

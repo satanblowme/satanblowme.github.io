@@ -125,11 +125,19 @@ async function generateSite() {
     <div class="products-grid">
       <% products.forEach(function(product) { %>
         <div class="product-card">
-          <% if (product.thumbnail_url && !product.thumbnail_url.includes('localhost')) { %>
-            <img src="<%= product.thumbnail_url %>" alt="<%= product.name %>">
-          <% } else { %>
-            <div class="no-img">no image</div>
-          <% } %>
+          <%
+  const img =
+    product.site_image_url ||
+    product.thumbnail_url ||
+    product.image_url ||
+    (product.images && product.images[0] && (product.images[0].url || product.images[0].original_url)) ||
+    '';
+%>
+<% if (img) { %>
+  <img src="<%= img %>" alt="<%= product.name %>">
+<% } else { %>
+  <div class="no-img">no image</div>
+<% } %>
           <div class="product-info">
             <p class="product-name"><%= product.name || 'item' %></p>
             <% if (product.price) { %><p class="product-price"><%= product.price.display_amount %></p><% } %>

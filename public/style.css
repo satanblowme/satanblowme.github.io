@@ -1,12 +1,95 @@
 /* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
    HTML content. To learn how to do something, just try searching Google for questions like
    "how to change link color." */
+/* testing an animation */
+.animate-flicker {
+  animation: flickerAnimation 2s infinite;
+}
 
+@keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-flicker-soft {
+  filter: drop-shadow(0 0 6px #0ff);
+  animation: flicker-soft 1.2s infinite;
+}
+
+@keyframes flicker-soft {
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    opacity: 1;
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    opacity: 0.85;
+  }
+}
+
+.flicker-opacity {
+  animation: flicker-opacity 1.8s infinite;
+}
+
+@keyframes flicker-opacity {
+  0% {
+    opacity: 0.6;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  30% {
+    opacity: 0.9;
+  }
+  40% {
+    opacity: 0.7;
+  }
+  55% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+/*business as usual */
 
  a {
-  color: #8bc466;
-  cursor: help;
+  background-color: rgba(76, 175, 80, 0.6);
+  color: #000000;
+  cursor: crosshair;
 } 
+
+a:hover {
+ background-color: transparent;
+
+}
 
  body {
   background-color: transparent;
@@ -25,16 +108,14 @@
 
 
  .blog {
-  background-color: transparent;
   background-image: none;
   width: 50%;
   left: auto;
-  color: white;
   border: none;
   margin: 20px;
   padding: 20px;
-  position: sticky;
-  z-index: 10;
+  position: relative;
+  z-index: 1;
  
 
 } 
@@ -69,7 +150,7 @@
 .row img {
    margin-top: 8px;
   vertical-align: middle;
-    z-index: 10;
+    z-index: -1;
 }
 
 
@@ -89,11 +170,12 @@
               
 
   z-index: 10;
-  overflow:auto;
+  overflow: hidden;
+  display: inline-block;
   max-width: 100%;
-  margin: auto;
-  position: relative;
-  padding: 10px 20px;
+  margin: auto 20px 50px auto;
+   position: absolute;
+  padding: 20px 20px;
   
 
   
@@ -119,7 +201,7 @@
   font-size: 20px;
   font-weight: normal;
    z-index: 10;
-   position: inherit;
+  
   
   
   /* p
@@ -164,11 +246,16 @@
  .satanblowme {
         position: relative;
         z-index: 30;
+        background-color: #FFFFFF;
+        animation: flicker-opacity 1.8s infinite;
+        
     }
     .satanblowme img {
         position: absolute;
         margin-top: -80px;
         margin-left: -40px;
+        animation: flicker-opacity 1.8s infinite;
+       
        
         
        
@@ -218,6 +305,6 @@
    width:100%;
    height:60px;
 flex-shrink: 0;
-  z-index: 10;
+  z-index: 2;
 }
 }
