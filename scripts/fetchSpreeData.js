@@ -9,11 +9,11 @@ async function fetchData() {
     console.log(`Fetching products from ${SPREE_BASE_URL}...`);
 
     const response = await axios.get(
-      `${SPREE_BASE_URL}/api/v2/storefront/products`,
+      `${SPREE_BASE_URL}/api/v3/store/products`,
       {
-        params: { per_page: 500, include: 'images,variants' },
+        params: { limit: 500 },
         headers: process.env.SPREE_API_KEY
-          ? { Authorization: `Bearer ${process.env.SPREE_API_KEY}` }
+          ? { 'x-spree-api-key': process.env.SPREE_API_KEY }
           : {},
       }
     );

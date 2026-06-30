@@ -10,8 +10,10 @@ async function generateSite() {
     let products = [];
     
     if (fs.existsSync(dataPath)) {
-      const data = fs.readFileSync(dataPath, 'utf-8');
-      products = JSON.parse(data);
+      const raw = fs.readFileSync(dataPath, 'utf-8');
+      const parsed = JSON.parse(raw);
+      // v3 API response: { data: [...], meta: {...} }
+      products = parsed.data || parsed;
     }
 
     const outputDir = path.join(__dirname, '../public');
@@ -49,6 +51,13 @@ async function generateSite() {
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
     .product h3 {
       margin-top: 0;
       color: #333;
@@ -69,10 +78,13 @@ async function generateSite() {
   <div class="products">
     <% products.forEach(product => { %>
       <div class="product">
-        <h3><%= product.attributes?.name || product.name || 'Product' %></h3>
-        <p><%= (product.attributes?.description || product.description || '').substring(0, 100) %>...</p>
+        <% if (product.thumbnail_url) { %>
+          <img src="<%= product.thumbnail_url %>" alt="<%= product.name %>">
+        <% } %>
+        <h3><%= product.name || 'Product' %></h3>
+        <p><%= (product.description || '').substring(0, 100) %>...</p>
         <div class="price">
-          $<%= product.attributes?.price || product.price || '0.00' %>
+          <%= product.price ? product.price.display_amount : '' %>
         </div>
       </div>
     <% }); %>
