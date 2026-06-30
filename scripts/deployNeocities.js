@@ -1,4 +1,4 @@
-const Neocities = require('neocities');
+const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -9,21 +9,20 @@ if (!apiToken) {
   process.exit(1);
 }
 
-const nc = new Neocities(apiToken);
-
 const filePath = path.join(__dirname, '../public/store.html');
 
 if (!fs.existsSync(filePath)) {
-  console.error('❌ store.html not found at', filePath);
+  console.error('❌ store.html not found');
   process.exit(1);
 }
 
 console.log('Uploading to Neocities...');
 
-nc.upload({ name: 'store.html', src: filePath }, (err) => {
-  if (err) {
-    console.error('❌ Upload failed:', err);
-    process.exit(1);
-  }
+try {
+  const cmd = `curl -F "store.html=@${filePath}" -H "Authorization: Bearer ${apiToken}" https://neocities.org/api/upload`;
+  execSync(cmd, { stdio: 'inherit' });
   console.log('✅ Successfully deployed to Neocities!');
-});
+} catch (error) {
+  console.error('❌ Upload failed:', error.message);
+  process.exit(1);
+}
