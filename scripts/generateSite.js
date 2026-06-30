@@ -23,72 +23,124 @@ async function generateSite() {
 
     const template = `
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Store</title>
+  <title>shop — satanblowme</title>
+  <link href="https://fonts.googleapis.com/css?family=Slabo+27px&display=swap" rel="stylesheet">
+  <link href="/style.css" rel="stylesheet" type="text/css" media="all">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-      background: #f5f5f5;
+    html {
+      background: url(img/230.GIF) repeat;
     }
-    h1 {
+    .shop-heading {
+      font-family: 'Slabo 27px', serif;
+      color: #fff;
       text-align: center;
-      color: #333;
+      font-size: 1.4em;
+      margin: 20px 0 10px;
+      letter-spacing: 0.05em;
     }
-    .products {
+    .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
-    .product {
-      background: white;
-      padding: 15px;
+    .product-card {
+      background: rgba(255, 255, 255, 0.92);
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .product img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 4px;
-      margin-bottom: 10px;
-    }
-    .product h3 {
-      margin-top: 0;
+      box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      font-family: 'Slabo 27px', serif;
       color: #333;
+      transition: transform 0.2s;
     }
-    .product p {
-      color: #666;
-      margin: 10px 0;
+    .product-card:hover {
+      transform: translateY(-3px);
     }
-    .price {
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .no-img {
+      width: 100%;
+      height: 220px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.85em;
+    }
+    .product-info {
+      padding: 10px 12px 14px;
+    }
+    .product-name {
+      font-size: 1em;
       font-weight: bold;
-      color: #27ae60;
-      font-size: 1.2em;
+      margin: 0 0 6px;
+      color: #222;
+    }
+    .product-price {
+      color: #cc3333;
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 0;
+    }
+    .product-desc {
+      font-size: 0.8em;
+      color: #666;
+      margin: 6px 0 0;
+      line-height: 1.4;
+    }
+    .empty-msg {
+      text-align: center;
+      color: #fff;
+      font-family: 'Slabo 27px', serif;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
-  <h1>Store</h1>
-  <div class="products">
-    <% products.forEach(product => { %>
-      <div class="product">
-        <% if (product.thumbnail_url) { %>
-          <img src="<%= product.thumbnail_url %>" alt="<%= product.name %>">
-        <% } %>
-        <h3><%= product.name || 'Product' %></h3>
-        <p><%= (product.description || '').substring(0, 100) %>...</p>
-        <div class="price">
-          <%= product.price ? product.price.display_amount : '' %>
-        </div>
-      </div>
-    <% }); %>
+  <div class="satanblowme"><img src="img/satanblowme.gif"></div>
+  <br>
+  <div class="header">
+    <a href="index.html"><img src="img/about_us.gif" style="width:auto;max-height:30px;"></a>
+    <a href="cursed_imgs.html"><img src="img/art.gif" style="width:auto;max-height:70px;"></a>
+    <a href="collections.html"><img src="img/collections.gif" width="280" height="40" style="object-fit:cover;"></a>
   </div>
+  <br>
+
+  <p class="shop-heading">shop</p>
+
+  <% if (products.length === 0) { %>
+    <p class="empty-msg">no products yet!</p>
+  <% } else { %>
+    <div class="products-grid">
+      <% products.forEach(function(product) { %>
+        <div class="product-card">
+          <% if (product.thumbnail_url && !product.thumbnail_url.includes('localhost')) { %>
+            <img src="<%= product.thumbnail_url %>" alt="<%= product.name %>">
+          <% } else { %>
+            <div class="no-img">no image</div>
+          <% } %>
+          <div class="product-info">
+            <p class="product-name"><%= product.name || 'item' %></p>
+            <% if (product.price) { %><p class="product-price"><%= product.price.display_amount %></p><% } %>
+            <% if (product.description) { %><p class="product-desc"><%= product.description.length > 80 ? product.description.substring(0, 80) + '...' : product.description %></p><% } %>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  <% } %>
+
+  <div class="footer"><a href="https://depop.com/satanblowme"><img src="i-98.gif"></a></div>
 </body>
 </html>
     `;
