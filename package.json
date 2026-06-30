@@ -1,11 +1,15 @@
 {
   "name": "satanblowme.github.io",
   "version": "1.0.0",
-  "description": "",
+  "description": "Spree store with Neocities deployment",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "fetch-data": "node scripts/fetchSpreeData.js",
+    "generate-site": "node scripts/generateSite.js",
+    "deploy": "npm run fetch-data && npm run generate-site && node scripts/deployNeocities.js",
+    "dev": "npm run fetch-data && npm run generate-site"
   },
   "repository": {
     "type": "git",
@@ -15,9 +19,14 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/satanblowme/satanblowme.github.io/issues"
+    "url": "https://github.com/satanblowme/satanblowme.github.io#readme"
   },
   "homepage": "https://github.com/satanblowme/satanblowme.github.io#readme",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "neocities": "^1.7.0",
+    "ejs": "^3.1.9"
+  },
   "devDependencies": {
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
