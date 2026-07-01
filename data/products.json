@@ -18,6 +18,7 @@
       "default_variant_id": "variant_UkLWZg9DAJ",
       "thumbnail_url": "http://localhost:3000/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--f12a8f7e59cc21f80a486e2b6884938e7f914951/tama_bags.jpg",
       "tags": [],
+      "checkout_url": "https://square.link/u/test123",
       "price": {
         "id": "price_UkLWZg9DAJ",
         "amount": "10.0",

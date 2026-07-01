@@ -99,6 +99,7 @@ async function generateSite() {
       margin: 6px 0 0;
       line-height: 1.4;
     }
+
     .empty-msg {
       text-align: center;
       color: #fff;
@@ -142,6 +143,22 @@ async function generateSite() {
             <p class="product-name"><%= product.name || 'item' %></p>
             <% if (product.price) { %><p class="product-price"><%= product.price.display_amount %></p><% } %>
             <% if (product.description) { %><p class="product-desc"><%= product.description.length > 80 ? product.description.substring(0, 80) + '...' : product.description %></p><% } %>
+      <%
+  const checkoutUrl =
+    product.checkout_url ||
+    product.checkoutUrl ||
+    product.square_checkout_url ||
+    product.payment_link_url ||
+    '';
+%>
+<% if (checkoutUrl) { %>
+  <p style="margin:10px 0 0;">
+    <a href="<%= checkoutUrl %>" target="_blank" rel="noopener noreferrer"
+       style="display:inline-block;background:#111;color:#fff;padding:8px 12px;border-radius:6px;text-decoration:none;font-size:0.85em;">
+      checkout
+    </a>
+  </p>
+<% } %>
           </div>
         </div>
       <% }); %>
