@@ -21,28 +21,28 @@ function walk(dir) {
   });
 }
 
-const files = walk(publicDir).filter((abs) => {
-  const rel = path.relative(publicDir, abs).replace(/\\/g, '/');
-  if (rel.endsWith('.DS_Store')) return false;
-  return true;
-});
+async function main() {
+  const files = walk(publicDir).filter((abs) => {
+    const rel = path.relative(publicDir, abs).replace(/\\/g, '/');
+    if (rel.endsWith('.DS_Store')) return false;
+    return true;
+  });
 
-if (!files.length) {
-  console.error('❌ No files found in public/');
-  process.exit(1);
-}
+  if (!files.length) {
+    throw new Error('❌ No files found in public/');
+  }
 
-const rels = files.map((abs) => path.relative(publicDir, abs).replace(/\\/g, '/'));
-console.log(`\nUploading ${rels.length} files from public/:`);
-rels.slice(0, 40).forEach((r) => console.log(`  - ${r}`));
-if (rels.length > 40) console.log(`  ...and ${rels.length - 40} more`);
+  const rels = files.map((abs) => path.relative(publicDir, abs).replace(/\\/g, '/'));
+  console.log(`\nAbout to upload ${rels.length} files from public/:`);
+  rels.slice(0, 40).forEach((r) => console.log(`  - ${r}`));
+  if (rels.length > 40) console.log(`  ...and ${rels.length - 40} more`);
 
-for (let i = 0; i < files.length; i++) {
-  const abs = files[i];
-  const rel = path.relative(publicDir, abs).replace(/\\/g, '/');
-  const remote = rel.split('/').map(encodeURIComponent).join('/');
+  // No interactive prompt — required for CI/non-TTY environments.
+  for (let i = 0; i < files.length; i++) {
+    const abs = files[i];
+    const rel = path.relative(publicDir, abs).replace(/\\/g, '/');
+    const remote = rel.split('/').map(encodeURIComponent).join('/');
 
-  try {
     console.log(`⬆️  [${i + 1}/${files.length}] ${rel}`);
     const out = execFileSync(
       'curl',
@@ -56,22 +56,5 @@ for (let i = 0; i < files.length; i++) {
         '--retry-delay', '1',
         '-H', `Authorization: Bearer ${token}`,
         '-F', `${remote}=@${abs}`,
-        'https://neocities.org/api/upload',
-      ],
-      { encoding: 'utf8' }
-    );
-    let parsed;
-    try { parsed = JSON.parse(out); } catch (_) { parsed = null; }
-    if (parsed && parsed.result === 'error') {
-      console.error(`❌ Neocities rejected: ${rel} — ${parsed.message || JSON.stringify(parsed)}`);
-      process.exit(1);
-    }
-    if (out && out.trim()) console.log(`   ${out.trim()}`);
-  } catch (e) {
-    console.error(`❌ Failed: ${rel}`);
-    console.error(e.stderr?.toString?.() || e.message);
-    process.exit(1);
-  }
-}
-
-console.log('\n✅ Full public/ sync complete.');
+        'https://neocities.org/api/upload',](#)
+
