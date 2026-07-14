@@ -2,13 +2,51 @@ const fs = require('fs');
 const path = require('path');
 const ejs = require('ejs');
 
+function slugify(input) {
+  return String(input || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function resolveProductImage(product) {
+  return (
+    product.site_image_url ||
+    product.thumbnail_url ||
+    product.image_url ||
+    (product.images &&
+      product.images[0] &&
+      (product.images[0].url || product.images[0].original_url)) ||
+    ''
+  );
+}
+
+function resolveCheckoutUrl(product) {
+  return (
+    product.checkout_url ||
+    product.checkoutUrl ||
+    product.square_checkout_url ||
+    product.payment_link_url ||
+    ''
+  );
+}
+
+function getDisplayPrice(product) {
+  if (product?.price?.display_amount) return product.price.display_amount;
+  if (typeof product?.price === 'string') return product.price;
+  return '';
+}
+
 async function generateSite() {
   try {
     console.log('Generating static site...');
 
     const dataPath = path.join(__dirname, '../data/products.json');
     let products = [];
-    
+
     if (fs.existsSync(dataPath)) {
       const raw = fs.readFileSync(dataPath, 'utf-8');
       const parsed = JSON.parse(raw);
@@ -17,11 +55,32 @@ async function generateSite() {
     }
 
     const outputDir = path.join(__dirname, '../public');
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
-    }
+    const productsOutputDir = path.join(outputDir, 'products');
 
-    const template = `
+    if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+    if (!fs.existsSync(productsOutputDir)) fs.mkdirSync(productsOutputDir, { recursive: true });
+
+    // Build stable, unique slugs
+    const usedSlugs = new Set();
+    const productsWithMeta = products.map((product, index) => {
+      const baseSlug = slugify(product.slug || product.name || product.id || `product-${index + 1}`) || `product-${index + 1}`;
+      let slug = baseSlug;
+      let n = 2;
+      while (usedSlugs.has(slug)) {
+        slug = `${baseSlug}-${n++}`;
+      }
+      usedSlugs.add(slug);
+
+      return {
+        ...product,
+        _slug: slug,
+        _img: resolveProductImage(product),
+        _checkoutUrl: resolveCheckoutUrl(product),
+        _displayPrice: getDisplayPrice(product),
+      };
+    });
+
+    const storeTemplate = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,12 +158,29 @@ async function generateSite() {
       margin: 6px 0 0;
       line-height: 1.4;
     }
-
     .empty-msg {
       text-align: center;
       color: #fff;
       font-family: 'Slabo 27px', serif;
       margin-top: 40px;
+    }
+    .product-links {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .product-btn {
+      display: inline-block;
+      background: #111;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.85em;
+    }
+    .product-btn.alt {
+      background: #444;
     }
   </style>
 </head>
@@ -126,39 +202,22 @@ async function generateSite() {
     <div class="products-grid">
       <% products.forEach(function(product) { %>
         <div class="product-card">
-          <%
-  const img =
-    product.site_image_url ||
-    product.thumbnail_url ||
-    product.image_url ||
-    (product.images && product.images[0] && (product.images[0].url || product.images[0].original_url)) ||
-    '';
-%>
-<% if (img) { %>
-  <img src="<%= img %>" alt="<%= product.name %>">
-<% } else { %>
-  <div class="no-img">no image</div>
-<% } %>
+          <% if (product._img) { %>
+            <img src="<%= product._img %>" alt="<%= product.name %>">
+          <% } else { %>
+            <div class="no-img">no image</div>
+          <% } %>
           <div class="product-info">
             <p class="product-name"><%= product.name || 'item' %></p>
-            <% if (product.price) { %><p class="product-price"><%= product.price.display_amount %></p><% } %>
+            <% if (product._displayPrice) { %><p class="product-price"><%= product._displayPrice %></p><% } %>
             <% if (product.description) { %><p class="product-desc"><%= product.description.length > 80 ? product.description.substring(0, 80) + '...' : product.description %></p><% } %>
-      <%
-  const checkoutUrl =
-    product.checkout_url ||
-    product.checkoutUrl ||
-    product.square_checkout_url ||
-    product.payment_link_url ||
-    '';
-%>
-<% if (checkoutUrl) { %>
-  <p style="margin:10px 0 0;">
-    <a href="<%= checkoutUrl %>" target="_blank" rel="noopener noreferrer"
-       style="display:inline-block;background:#111;color:#fff;padding:8px 12px;border-radius:6px;text-decoration:none;font-size:0.85em;">
-      checkout
-    </a>
-  </p>
-<% } %>
+
+            <div class="product-links">
+              <a href="/products/<%= product._slug %>.html" class="product-btn alt">details</a>
+              <% if (product._checkoutUrl) { %>
+                <a href="<%= product._checkoutUrl %>" target="_blank" rel="noopener noreferrer" class="product-btn">checkout</a>
+              <% } %>
+            </div>
           </div>
         </div>
       <% }); %>
@@ -170,10 +229,135 @@ async function generateSite() {
 </html>
     `;
 
-    const html = ejs.render(template, { products });
-    fs.writeFileSync(path.join(outputDir, 'store.html'), html);
+    const productTemplate = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= product.name || 'item' %> — satanblowme shop</title>
+  <link href="https://fonts.googleapis.com/css?family=Slabo+27px&display=swap" rel="stylesheet">
+  <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+  <style>
+    html { background: url(/img/230.GIF) repeat; }
+    body {
+      font-family: 'Slabo 27px', serif;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: #fff;
+      text-decoration: underline;
+    }
+    .panel {
+      background: rgba(255, 255, 255, 0.92);
+      color: #222;
+      border-radius: 10px;
+      box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+    .hero {
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      display: block;
+      background: #ddd;
+    }
+    .no-img {
+      width: 100%;
+      height: 320px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+    }
+    .content {
+      padding: 18px 20px 24px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      color: #111;
+    }
+    .price {
+      color: #cc3333;
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin: 0 0 12px;
+    }
+    .desc {
+      color: #444;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    .checkout {
+      display: inline-block;
+      margin-top: 16px;
+      background: #111;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="/store.html">← back to shop</a>
 
-    console.log(`✅ Generated store.html with ${products.length} products`);
+    <div class="panel">
+      <% if (product._img) { %>
+        <img class="hero" src="<%= product._img %>" alt="<%= product.name %>">
+      <% } else { %>
+        <div class="no-img">no image</div>
+      <% } %>
+
+      <div class="content">
+        <h1><%= product.name || 'item' %></h1>
+        <% if (product._displayPrice) { %><p class="price"><%= product._displayPrice %></p><% } %>
+        <% if (product.description) { %>
+          <p class="desc"><%= product.description %></p>
+        <% } else { %>
+          <p class="desc">no description yet.</p>
+        <% } %>
+
+        <% if (product._checkoutUrl) { %>
+          <a class="checkout" href="<%= product._checkoutUrl %>" target="_blank" rel="noopener noreferrer">checkout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+    `;
+
+    // Generate store page
+    const storeHtml = ejs.render(storeTemplate, { products: productsWithMeta });
+    fs.writeFileSync(path.join(outputDir, 'store.html'), storeHtml);
+
+    // Generate individual product pages
+    for (const product of productsWithMeta) {
+      const productHtml = ejs.render(productTemplate, { product });
+      fs.writeFileSync(path.join(productsOutputDir, `${product._slug}.html`), productHtml);
+    }
+
+    console.log(`✅ Generated store.html with ${productsWithMeta.length} products`);
+    console.log(`✅ Generated ${productsWithMeta.length} individual product pages in /public/products`);
+
+    const examples = productsWithMeta.slice(0, 3).map((p) => `/products/${p._slug}.html`);
+    if (examples.length) {
+      console.log('Examples:');
+      examples.forEach((url) => console.log(`   ${url}`));
+    }
   } catch (error) {
     console.error('❌ Error generating site:', error.message);
     process.exit(1);
