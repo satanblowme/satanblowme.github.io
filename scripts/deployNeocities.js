@@ -56,5 +56,16 @@ async function main() {
         '--retry-delay', '1',
         '-H', `Authorization: Bearer ${token}`,
         '-F', `${remote}=@${abs}`,
-        'https://neocities.org/api/upload',](#)
-
+        'https://neocities.org/api/upload',
+      ],
+      { encoding: 'utf8' },
+    );
+    console.log(`  ✅ ${rel} → ${out.trim()}`);
+  }
+  console.log('\n✅ All files uploaded successfully');
+}
+
+main().catch((err) => {
+  console.error(err.message || err);
+  process.exit(1);
+});
