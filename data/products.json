@@ -1,6 +1,38 @@
 {
   "data": [
     {
+      "id": "prod_gbHJdmfrXB",
+      "name": "you",
+      "slug": "you",
+      "meta_title": null,
+      "meta_description": null,
+      "meta_keywords": null,
+      "variant_count": 0,
+      "available_on": null,
+      "purchasable": true,
+      "in_stock": true,
+      "backorderable": false,
+      "available": true,
+      "description": "hjkgkj",
+      "description_html": "<p>hjkgkj</p>",
+      "default_variant_id": "variant_gbHJdmfrXB",
+      "thumbnail_url": "http://localhost:3000/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6OCwicHVyIjoiYmxvYl9pZCJ9fQ==--ddfc748118ea39f8f6b164a2eb2758ebd6be9c78/teal_bunny.jpg",
+      "tags": [],
+      "price": {
+        "id": "price_gbHJdmfrXB",
+        "amount": "9000.0",
+        "amount_in_cents": 900000,
+        "compare_at_amount": null,
+        "compare_at_amount_in_cents": null,
+        "currency": "USD",
+        "display_amount": "$9,000.00",
+        "display_compare_at_amount": null,
+        "price_list_id": null
+      },
+      "original_price": null,
+      "site_image_url": "/img/products/you-prodgbhjdmfrxb.jpg"
+    },
+    {
       "id": "prod_UkLWZg9DAJ",
       "name": "yes",
       "slug": "yes",
@@ -18,7 +50,6 @@
       "default_variant_id": "variant_UkLWZg9DAJ",
       "thumbnail_url": "http://localhost:3000/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--f12a8f7e59cc21f80a486e2b6884938e7f914951/tama_bags.jpg",
       "tags": [],
-      "checkout_url": "https://square.link/u/test123",
       "price": {
         "id": "price_UkLWZg9DAJ",
         "amount": "10.0",
