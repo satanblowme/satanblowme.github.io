@@ -30,7 +30,7 @@
         "price_list_id": null
       },
       "original_price": null,
-      "site_image_url": "/img/products/you-prodgbhjdmfrxb.jpg"
+      "checkout_url": ""
     },
     {
       "id": "prod_UkLWZg9DAJ",
@@ -62,7 +62,7 @@
         "price_list_id": null
       },
       "original_price": null,
-      "site_image_url": "/img/products/yes-produklwzg9daj.jpg"
+      "checkout_url": ""
     }
   ],
   "meta": {
