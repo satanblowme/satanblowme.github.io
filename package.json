@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/satanblowme/satanblowme.github.io#readme",
   "dependencies": {
-    "axios": "^1.6.0",
+    "axios": "^1.18.1",
     "ejs": "^3.1.9",
     "neocities": "^0.0.3"
   },
