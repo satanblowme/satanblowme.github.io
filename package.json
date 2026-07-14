@@ -9,6 +9,7 @@
     "fetch-data": "dotenv -e .env -- node scripts/fetchSpreeData.js",
     "generate-site": "dotenv -e .env -- node scripts/generateSite.js",
     "sync": "dotenv -e .env -- node scripts/syncProducts.js",
+    "sync-square": "dotenv -e .env -- node scripts/syncSpreeToSquare.js",
     "deploy": "dotenv -e .env -- npm run fetch-data && dotenv -e .env -- npm run generate-site && dotenv -e .env -- node scripts/deployNeocities.js",
     "dev": "dotenv -e .env -- npm run fetch-data && dotenv -e .env -- npm run generate-site"
   },
