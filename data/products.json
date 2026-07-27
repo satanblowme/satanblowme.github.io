@@ -30,6 +30,10 @@
         "price_list_id": null
       },
       "original_price": null,
+      "_sync_id": "prod_gbHJdmfrXB",
+      "_sync_sku": "",
+      "_sync_name": "you",
+      "_square_source": "",
       "checkout_url": ""
     },
     {
@@ -62,6 +66,10 @@
         "price_list_id": null
       },
       "original_price": null,
+      "_sync_id": "prod_UkLWZg9DAJ",
+      "_sync_sku": "",
+      "_sync_name": "yes",
+      "_square_source": "",
       "checkout_url": ""
     }
   ],

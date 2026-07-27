@@ -8,97 +8,59 @@
   <link href="https://fonts.googleapis.com/css?family=Slabo+27px&display=swap" rel="stylesheet">
   <link href="/style.css" rel="stylesheet" type="text/css" media="all">
   <style>
-    html { background: url(/img/230.GIF) repeat; }
-    body {
-      font-family: 'Slabo 27px', serif;
-      color: #fff;
-      margin: 0;
-      padding: 20px;
-    }
-    .wrap {
-      max-width: 920px;
-      margin: 0 auto;
-    }
-    .back {
-      display: inline-block;
-      margin-bottom: 16px;
-      color: #fff;
-      text-decoration: underline;
-    }
-    .panel {
-      background: rgba(255, 255, 255, 0.92);
-      color: #222;
-      border-radius: 10px;
-      box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-    }
-    .hero {
-      width: 100%;
-      max-height: 520px;
-      object-fit: cover;
-      display: block;
-      background: #ddd;
-    }
-    .no-img {
-      width: 100%;
-      height: 320px;
-      background: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-    }
-    .content {
-      padding: 18px 20px 24px;
-    }
-    h1 {
-      margin: 0 0 8px;
-      font-size: 2rem;
-      color: #111;
-    }
-    .price {
-      color: #cc3333;
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin: 0 0 12px;
-    }
-    .desc {
-      color: #444;
-      line-height: 1.6;
-      white-space: pre-wrap;
-    }
-    .checkout {
-      display: inline-block;
-      margin-top: 16px;
-      background: #111;
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 0.95em;
-    }
+    html { background:url(/img/230.GIF) repeat; }
+    body { font-family:'Slabo 27px', serif; color:#fff; margin:0; padding:20px; }
+    .wrap { max-width:960px; margin:0 auto; }
+    .back { display:inline-block; margin-bottom:12px; color:#fff; text-decoration:underline; }
+    .panel { background:rgba(255,255,255,.92); color:#222; border-radius:10px; box-shadow:2px 3px 8px rgba(0,0,0,.3); overflow:hidden; }
+    .content { padding:18px 20px 24px; }
+    h1 { margin:0 0 8px; font-size:2rem; color:#111; }
+    .price { color:#cc3333; font-size:1.3rem; font-weight:bold; margin:0 0 12px; }
+    .desc { color:#444; line-height:1.6; white-space:pre-wrap; }
+    .checkout { display:inline-block; margin-top:16px; background:#111; color:#fff; padding:10px 14px; border-radius:6px; text-decoration:none; font-size:.95em; }
+
+    .main-image-wrap { background:#eee; display:flex; align-items:center; justify-content:center; max-height:520px; overflow:hidden; }
+    .main-image { width:100%; max-height:520px; object-fit:contain; display:block; background:#ddd; }
+    .thumb-row { display:flex; gap:8px; padding:10px 12px; flex-wrap:wrap; background:#f2f2f2; border-top:1px solid #ddd; }
+    .thumb-btn { border:2px solid transparent; border-radius:6px; padding:0; background:none; cursor:pointer; }
+    .thumb-btn.active { border-color:#111; }
+    .thumb { width:72px; height:72px; object-fit:cover; display:block; border-radius:4px; background:#ddd; }
+    .no-img { width:100%; height:300px; display:flex; align-items:center; justify-content:center; color:#999; background:#ddd; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <a class="back" href="/store.html">← back to shop</a>
-
     <div class="panel">
       
-        <img class="hero" src="http://localhost:3000/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--f12a8f7e59cc21f80a486e2b6884938e7f914951/tama_bags.jpg" alt="yes">
+        <div class="main-image-wrap">
+          <img id="mainImage" class="main-image" src="http://localhost:3000/rails/active_storage/blobs/proxy/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--f12a8f7e59cc21f80a486e2b6884938e7f914951/tama_bags.jpg" alt="yes">
+        </div>
+        
       
 
       <div class="content">
         <h1>yes</h1>
         <p class="price">$10.00</p>
-        
-          <p class="desc">good</p>
-        
-
+        <p class="desc">good</p>
         
       </div>
     </div>
   </div>
+
+  <script>
+    (function() {
+      const main = document.getElementById('mainImage');
+      const btns = document.querySelectorAll('.thumb-btn');
+      if (!main || !btns.length) return;
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          main.src = btn.getAttribute('data-img');
+          btns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
-    

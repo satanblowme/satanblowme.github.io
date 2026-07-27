@@ -8,109 +8,29 @@
   <link href="https://fonts.googleapis.com/css?family=Slabo+27px&display=swap" rel="stylesheet">
   <link href="/style.css" rel="stylesheet" type="text/css" media="all">
   <style>
-    html {
-      background: url(img/230.GIF) repeat;
-    }
-    .shop-heading {
-      font-family: 'Slabo 27px', serif;
-      color: #fff;
-      text-align: center;
-      font-size: 1.4em;
-      margin: 20px 0 10px;
-      letter-spacing: 0.05em;
-    }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .product-card {
-      background: rgba(255, 255, 255, 0.92);
-      border-radius: 8px;
-      box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-      font-family: 'Slabo 27px', serif;
-      color: #333;
-      transition: transform 0.2s;
-    }
-    .product-card:hover {
-      transform: translateY(-3px);
-    }
-    .product-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-    .no-img {
-      width: 100%;
-      height: 220px;
-      background: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-      font-size: 0.85em;
-    }
-    .product-info {
-      padding: 10px 12px 14px;
-    }
-    .product-name {
-      font-size: 1em;
-      font-weight: bold;
-      margin: 0 0 6px;
-      color: #222;
-    }
-    .product-price {
-      color: #cc3333;
-      font-size: 1.1em;
-      font-weight: bold;
-      margin: 0;
-    }
-    .product-desc {
-      font-size: 0.8em;
-      color: #666;
-      margin: 6px 0 0;
-      line-height: 1.4;
-    }
-    .empty-msg {
-      text-align: center;
-      color: #fff;
-      font-family: 'Slabo 27px', serif;
-      margin-top: 40px;
-    }
-    .product-links {
-      margin-top: 10px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .product-btn {
-      display: inline-block;
-      background: #111;
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 0.85em;
-    }
-    .product-btn.alt {
-      background: #444;
-    }
+    html { background: url(img/230.GIF) repeat; }
+    .shop-heading { font-family:'Slabo 27px', serif; color:#fff; text-align:center; font-size:1.4em; margin:20px 0 10px; letter-spacing:.05em; }
+    .products-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; padding:20px; max-width:1000px; margin:0 auto; }
+    .product-card { background:rgba(255,255,255,.92); border-radius:8px; box-shadow:2px 3px 8px rgba(0,0,0,.3); overflow:hidden; font-family:'Slabo 27px', serif; }
+    .product-card img { width:100%; height:220px; object-fit:cover; display:block; }
+    .no-img { width:100%; height:220px; background:#ddd; display:flex; align-items:center; justify-content:center; color:#999; font-size:.85em; }
+    .product-info { padding:10px 12px 14px; }
+    .product-name { font-size:1em; font-weight:bold; margin:0 0 6px; color:#222; }
+    .product-price { color:#cc3333; font-size:1.1em; font-weight:bold; margin:0; }
+    .product-desc { font-size:.8em; color:#666; margin:6px 0 0; line-height:1.4; }
+    .btns { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+    .btn { display:inline-block; background:#111; color:#fff; padding:8px 12px; border-radius:6px; text-decoration:none; font-size:.85em; }
+    .btn.alt { background:#444; }
+    .empty-msg { text-align:center; color:#fff; font-family:'Slabo 27px', serif; margin-top:40px; }
   </style>
 </head>
 <body>
-  <div class="satanblowme"><img src="img/satanblowme.gif"></div>
-  <br>
+  <div class="satanblowme"><img src="img/satanblowme.gif"></div><br>
   <div class="header">
     <a href="index.html"><img src="img/about_us.gif" style="width:auto;max-height:30px;"></a>
     <a href="cursed_imgs.html"><img src="img/art.gif" style="width:auto;max-height:70px;"></a>
     <a href="collections.html"><img src="img/collections.gif" width="280" height="40" style="object-fit:cover;"></a>
-  </div>
-  <br>
+  </div><br>
 
   <p class="shop-heading">shop</p>
 
@@ -125,9 +45,8 @@
             <p class="product-name">you</p>
             <p class="product-price">$9,000.00</p>
             <p class="product-desc">hjkgkj</p>
-
-            <div class="product-links">
-              <a href="/products/you.html" class="product-btn alt">details</a>
+            <div class="btns">
+              <a class="btn alt" href="/products/you.html">details</a>
               
             </div>
           </div>
@@ -141,9 +60,8 @@
             <p class="product-name">yes</p>
             <p class="product-price">$10.00</p>
             <p class="product-desc">good</p>
-
-            <div class="product-links">
-              <a href="/products/yes.html" class="product-btn alt">details</a>
+            <div class="btns">
+              <a class="btn alt" href="/products/yes.html">details</a>
               
             </div>
           </div>
@@ -155,4 +73,3 @@
   <div class="footer"><a href="https://depop.com/satanblowme"><img src="i-98.gif"></a></div>
 </body>
 </html>
-    
