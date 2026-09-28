@@ -33,8 +33,8 @@
       "_sync_id": "prod_gbHJdmfrXB",
       "_sync_sku": "",
       "_sync_name": "you",
-      "_square_source": "",
-      "checkout_url": ""
+      "_square_source": "square-api",
+      "checkout_url": "https://sandbox.square.link/u/ZxbU2BNu"
     },
     {
       "id": "prod_UkLWZg9DAJ",
